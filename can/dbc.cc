@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <filesystem>
 #include <fstream>
 #include <map>
 #include <regex>
@@ -226,18 +225,4 @@ const DBC* dbc_lookup(const std::string& dbc_name) {
     it = dbcs.insert(it, {dbc_name, dbc_parse(dbc_name, dbc_file_path)});
   }
   return it->second;
-}
-
-std::vector<std::string> get_dbc_names() {
-  static const std::string& dbc_file_path = get_dbc_file_path();
-  std::vector<std::string> dbcs;
-  for (std::filesystem::directory_iterator i(dbc_file_path), end; i != end; i++) {
-    if (!is_directory(i->path())) {
-      std::string filename = i->path().filename();
-      if (!startswith(filename, "_") && endswith(filename, ".dbc")) {
-        dbcs.push_back(filename.substr(0, filename.length() - 4));
-      }
-    }
-  }
-  return dbcs;
 }
