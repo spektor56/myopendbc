@@ -45,8 +45,8 @@ class TestCanParserPacker(unittest.TestCase):
       ("COUNTER", "CAN_FD_MESSAGE"),
     ]
     checks = [("CAN_FD_MESSAGE", 10), ]
-    packer = CANPacker(TEST_DBC)
-    parser = CANParser(TEST_DBC, signals, checks, 0)
+    packer = CANPacker("test")
+    parser = CANParser("test", signals, checks, 0)
 
     # shouldn't be valid initially
     self.assertFalse(parser.can_valid)
